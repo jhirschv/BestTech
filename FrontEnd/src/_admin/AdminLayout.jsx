@@ -17,6 +17,7 @@ import {
   ShoppingCart,
   Truck,
   Users2,
+  UserRound
 } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import {
@@ -76,7 +77,7 @@ import {
   } from "@/components/ui/tooltip"
 import { Outlet } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import AuthContext from '../context/AuthContext';
 
 export default function AdminLayout() {
@@ -89,9 +90,11 @@ export default function AdminLayout() {
         navigate('/');
     };
 
+    const [isSheetOpen, setIsSheetOpen] = useState(false)
+
   return (
     <div className="flex min-h-screen flex-grow w-full flex-col bg-muted/40">
-      <aside className="fixed inset-y-0 left-0 z-10 hidden w-40 flex-col border-r bg-background sm:flex">
+      <aside className="fixed inset-y-0 left-0 z-10 hidden w-44 flex-col border-r bg-background sm:flex">
       <nav className="grid items-start gap-4 pt-8 px-2 text-sm font-medium lg:px-4">
               <Link
                 to="/admin"
@@ -118,7 +121,7 @@ export default function AdminLayout() {
       </aside>
       <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-44">
         <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
-          <Sheet>
+          <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
             <SheetTrigger asChild>
               <Button size="icon" variant="outline" className="sm:hidden">
                 <PanelLeft className="h-5 w-5" />
@@ -126,41 +129,30 @@ export default function AdminLayout() {
               </Button>
             </SheetTrigger>
             <SheetContent side="left" className="sm:max-w-xs">
-              <nav className="grid gap-6 text-lg font-medium">
+              <nav className="grid gap-4 text-lg font-medium">
                 <Link
-                  href="#"
-                  className="group flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:text-base"
-                >
-                  <Package2 className="h-5 w-5 transition-all group-hover:scale-110" />
-                  <span className="sr-only">Acme Inc</span>
-                </Link>
-                <Link
-                  href="#"
-                  className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
-                >
-                  <Home className="h-5 w-5" />
-                  Dashboard
-                </Link>
-                <Link
-                  href="#"
-                  className="flex items-center gap-4 px-2.5 text-foreground"
+                  to="/admin"
+                  onClick={() => setIsSheetOpen(!isSheetOpen)}
+                  className="flex items-center gap-3 rounded-lg px-3 py-2 text-base text-muted-foreground transition-all hover:text-primary"
                 >
                   <ShoppingCart className="h-5 w-5" />
                   Orders
                 </Link>
                 <Link
-                  href="#"
-                  className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+                  onClick={() => setIsSheetOpen(!isSheetOpen)}
+                  to="/admin/all_products"
+                  className="flex items-center gap-3 rounded-lg px-3 py-2 text-base text-muted-foreground transition-all hover:text-primary"
                 >
                   <Package className="h-5 w-5" />
-                  Products
+                  Products{" "}
                 </Link>
                 <Link
-                  href="#"
-                  className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+                  onClick={() => setIsSheetOpen(!isSheetOpen)}
+                  to='/admin/analytics'
+                  className="flex items-center gap-3 rounded-lg px-3 py-2 text-base text-muted-foreground transition-all hover:text-primary"
                 >
                   <LineChart className="h-5 w-5" />
-                  Settings
+                  Analytics
                 </Link>
               </nav>
             </SheetContent>
@@ -185,39 +177,14 @@ export default function AdminLayout() {
             </BreadcrumbList>
           </Breadcrumb>
           <div className="ml-auto flex items-center gap-2 flex-1 md:grow-0">
-            <Button onClick={handleGoToStore} size='sm' >Go to store</Button>
-            <div className='relative'>
-              <Search className="absolute left-2.5 top-3 h-4 w-4 text-muted-foreground" />
-              <Input
-                type="search"
-                placeholder="Search..."
-                className="w-full rounded-lg bg-background pl-8 md:w-[200px] lg:w-[336px]"
-              />
-            </div>
+            <Button onClick={handleGoToStore} size='sm' className='text-xs h-8 p-2 rounded-xs' >Go to store</Button>
           </div>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button
-                variant="outline"
-                size="icon"
-                className="overflow-hidden rounded-full"
-              >
-                <img
-                  src="/placeholder-user.jpg"
-                  width={56}
-                  height={56}
-                  alt="Avatar"
-                  className="object-cover"
-                />
-              </Button>
+             <UserRound className="h-5 w-5 mr-2 hover:scale-102" />
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Settings</DropdownMenuItem>
-              <DropdownMenuItem>Support</DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={logoutUser}>Logout</DropdownMenuItem>
+              <DropdownMenuItem className='font-semibold' onClick={logoutUser}>Logout</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </header>

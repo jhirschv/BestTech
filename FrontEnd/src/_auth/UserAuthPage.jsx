@@ -102,7 +102,7 @@ export default function UserAuthPage() {
   };
 
   return (
-    <div className="w-full h-[100vh] flex items-center justify-center">
+    <div className="w-full h-[100vh] flex items-center justify-center p-2">
       <Tabs defaultValue="login" className="w-[400px]">
         <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="login">User Login</TabsTrigger>

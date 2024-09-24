@@ -5,6 +5,16 @@ import { Elements } from '@stripe/react-stripe-js';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import PaymentModel from './PaymentModel';
+import { Button } from '@/components/ui/button';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
 
 const OrderSummary = () => {
 
@@ -133,42 +143,36 @@ useEffect(() => {
 
 
   return (
-  <main className="bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% max-w-4xl mx-auto bg-white shadow-md rounded-lg"> 
-    <div className="bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% max-w-4xl mx-auto p-6 border bg-white shadow-md rounded-lg">
-       <h2 className="text-2xl font-bold mb-4">Order Summary</h2>
-      <div className="mb-6">
-        <table className="bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% min-w-full bg-white">
-          <thead>
-            <tr>
-              <th className="py-2 px-4 border-b">Item No</th>
-              <th className="py-2 px-4 border-b">Item Name</th>
-              <th className="py-2 px-4 border-b">Price</th>
-              <th className="py-2 px-4 border-b">Quantity</th>
-              <th className="py-2 px-4 border-b">Total</th>
-            </tr>
-          </thead>
-          <tbody>
+  <main className="max-w-4xl mx-auto bg-white rounded-lg"> 
+    <div className="max-w-4xl mx-auto p-6 pt-0 bg-white rounded-lg">
+      <h2 className="text-2xl font-semibold py-6">Order Summary</h2>
+      <div className="mb-6 font-semibold">
+        <Table className="max-w-full bg-white">
+          <TableHeader>
+            <TableRow>
+              <TableHead className="">Product Name</TableHead>
+              <TableHead className="">Price</TableHead>
+              <TableHead className="">Quantity</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
             {orderItems.map((item, index) => (
-              <tr key={index}>
-                <td className="py-2 px-4 border-b">{index+1}</td>
-                <td className="py-2 px-4 border-b">{item.productName}</td>
-                <td className="py-2 px-4 border-b">${item.price.toFixed(2)}</td>
-                <td className="py-2 px-4 border-b">{item.quantity}</td>
-                <td className="py-2 px-4 border-b">${(item.price.toFixed(2) * item.quantity)}</td>
-                
-              </tr>
+              <TableRow key={index}>
+                <TableCell className="py-6 px-4 text-sm md:text-base border-b">{item.productName}</TableCell>
+                <TableCell className="py-6 px-4 text-sm md:text-base border-b">${item.price.toFixed(2)}</TableCell>
+                <TableCell className="py-6 px-4 text-sm md:text-base border-b">{item.quantity}</TableCell>
+              </TableRow>
             ))}
-          </tbody>
+          </TableBody>
           <tfoot>
-            <tr>
-              <td colSpan="4" className="border-b text-right font-bold">Total : </td>
-              <td className="border-b font-bold">${total}</td>
-            </tr>
+            <TableRow className='border-none'>
+              <TableCell colSpan="4" className="pt-4 text-base text-center font-semibold">Total : ${total}</TableCell>
+            </TableRow>
           </tfoot>
-        </table>
+        </Table>
       </div>
       <form onSubmit={handleSubmitOrder}> 
-        <h3 className="text-xl font-bold mb-2">Contact Information</h3>
+        <h3 className="text-xl font-semibold mb-2">Contact Information</h3>
         <div>
         
         <input
@@ -193,7 +197,7 @@ useEffect(() => {
         />
       </div>
 
-        <h3 className="text-xl font-bold mb-2">Shipping Address</h3>
+        <h3 className="text-xl font-semibold mb-2">Shipping Address</h3>
         <input
           type="text"
           name="fullName"
@@ -248,15 +252,13 @@ useEffect(() => {
           className="w-full p-2 border border-gray-300 rounded mb-4"
           required
         />
-
-<h2 className="text-xl font-bold mb-2">Billing Address</h2>
     <input
       type="checkbox"
       checked={isSameAddress}
       onChange={handleCheckboxChange}
     />
 
-<label className="text-xl font-semibold mb-2">  Billing address same as shipping address</label>
+<label className="text-md md:text-base font-semibold mb-2"> Billing address same as shipping address</label>
 
 {!isSameAddress && (
   <>
@@ -266,7 +268,7 @@ useEffect(() => {
       value={addressDto.billingAddress.fullName}
       onChange={(e) => handleInputChange(e, 'billingAddress')}
       placeholder="Name"
-      className="w-full p-2 border border-gray-300 rounded mb-4"
+      className="w-full p-2 mt-2 border border-gray-300 rounded mb-4"
     />
     <input
       type="text"
@@ -307,48 +309,45 @@ useEffect(() => {
           value={addressDto.billingAddress.country}
           onChange={(e) => handleInputChange(e, 'billingAddress')}
           placeholder="Country"
-          className="w-full p-2 border border-gray-300 rounded mb-4"
+          className="w-full p-2 border border-gray-300 rounded"
           
      />
+     
   </>
 )}       
         
       </form>
-      <div className="bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% max-w-4xl mx-auto p-6 border bg-white shadow-md rounded-lg">
-            <h1 className="text-2xl font-bold mb-6">Stripe Payment Option</h1>
-            <div className="mt-6">
-                <button
-                    type="button"
-                    onClick={handleOpenModel}
-                    className="px-4 py-2 text-white font-semibold rounded-lg shadow-md bg-blue-500 hover:bg-blue-600 transition-colors"
-                >
-                    Pay
-                </button>
+              <div className='flex pb-8'>
+                  <Button
+                      type="Button"
+                      onClick={handleOpenModel}
+                      className="w-full rounded-sm py-6 mt-4"
+                  >
+                      Checkout with Stripe
+                  </Button>
+              </div>
+              {isModelOpen && (
+                  <PaymentModel addressDto={addressDto} orderId={orderId} onClose={handleCloseModel} 
+                  onSuccess={handlePaymentSuccess}
+                  amount={total}
+                  />
+                  
+              )}
+             {/*  <div>
+                  <button
+                      type="button"
+                      disabled={!paymentSuccess}
+                      className={`px-4 py-2 text-white font-semibold rounded-lg shadow-md transition-colors ${
+                          paymentSuccess
+                              ? 'bg-blue-500 hover:bg-blue-600'
+                              : 'bg-gray-300 cursor-not-allowed'
+                      }`}
+                      onClick={handleSubmitOrder}
+                  >
+                      Submit Order
+                  </button>
+              </div> */}
             </div>
-            {isModelOpen && (
-                <PaymentModel onClose={handleCloseModel} 
-                onSuccess={handlePaymentSuccess}
-                amount={total}
-                />
-                
-            )}
-            <div className="mt-6">
-              
-                <button
-                    type="button"
-                    disabled={!paymentSuccess}
-                    className={`px-4 py-2 text-white font-semibold rounded-lg shadow-md transition-colors ${
-                        paymentSuccess
-                            ? 'bg-blue-500 hover:bg-blue-600'
-                            : 'bg-gray-300 cursor-not-allowed'
-                    }`}
-                    onClick={handleSubmitOrder}
-                >
-                    Submit Order
-                </button>
-            </div>
-        </div>
-    </div>
     </main>
   );
 };

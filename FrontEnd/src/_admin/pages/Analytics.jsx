@@ -52,7 +52,7 @@ const Analytics = () => {
     }, []);
     
   return (
-    <main className="grid lg:grid-cols-2 xl:grid-cols-3 flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
+    <main className="grid lg:grid-cols-2 xl:grid-cols-3 flex-1 items-start gap-4 p-2 sm:px-6 sm:py-0 md:gap-8">
         <div className='md:col-span-1'>
             <CustomPieChart chartData={pieChartData} />
         </div>

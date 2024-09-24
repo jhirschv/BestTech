@@ -22,6 +22,17 @@ import { CartContext } from './CartContext';
 import {
   Truck,
 } from "lucide-react";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import {
+  Home,
+  LineChart,
+  Package,
+  Package2,
+  PanelLeft,
+  AlignJustify
+} from "lucide-react"
+import { Link } from 'react-router-dom';
+import { PlaceholdersAndVanishInput } from "../ui/placeholders-and-vanish-input";
 
 const Topbar = () => {
 
@@ -148,13 +159,126 @@ const Topbar = () => {
 
   const searchItemsNull = []
 
-  
+  const placeholders = [
+    'Apple - MacBook"',
+    "Canon - EOS",
+    "Headphones",
+    "Sony - Alpha",
+    "iPhone 15 Pro",
+  ];
+
+  const [searchTerm, setSearchTerm] = useState("")
+
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  function handleSearch() {
+    navigate(`/results/${searchTerm}`)
+    window.location.reload();
+  }
+
+  const [isSheetOpen, setIsSheetOpen] = useState(false)
 
   return (
-    <div className="fixed z-50 top-0 bg-background flex items-center justify-center w-full h-14 px-6 bg-secondary">
-      <div className="flex items-center gap-8">
+    <div className="fixed z-50 top-0 bg-background flex items-center justify-between lg:justify-center w-full h-14 px-4 bg-secondary">
+      <div className='lg:hidden flex items-center gap-1'>
+        <Store onClick={handleGoToHero} className="h-5 w-5 hover:text-foreground hover:scale-102 transition-transform" />
+      </div>
+      <div className='lg:hidden flex gap-6 items-center'>
+      <Button onClick={() => navigate('/admin')} className='text-xs h-8 p-2 rounded-xs'>View Admin Dashboard</Button>
+      <Search onClick={() => setIsSheetOpen(!isSheetOpen)} className="h-4 w-4 hover:scale-102" />
+      {user &&
+        <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+            {user &&      
+              <UserRound className="h-4 w-4 hover:scale-102" />}
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={handleLogoutUser}>Logout</DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+          }
+        {!user &&      
+        <UserRound onClick={handleGoToUser} className="h-4 w-4 hover:scale-102" />}
+        <CartIcon handleGoToCart={handleGoToCart} className="h-4 w-4 hover:scale-102" />  
+        <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
+          <SheetTrigger asChild>
+            <Button size="icon" variant="outline" className="lg:hidden">
+              <AlignJustify className="h-5 w-5" />
+              <span className="sr-only">Toggle Menu</span>
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="left" className="sm:max-w-xs pt-10">
+            <nav className="grid gap-6 text-lg font-medium">
+              <PlaceholdersAndVanishInput
+                placeholders={placeholders}
+                onChange={handleSearchChange}
+                onSubmit={handleSearch}
+              />
+              <Link
+                to='/results/all'
+                className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+                onClick={() => setIsSheetOpen(!isSheetOpen)}
+              >
+                <Package className="h-5 w-5" />
+                All Products
+              </Link>
+              <Link
+                to='/'
+                className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+                onClick={() => setIsSheetOpen(!isSheetOpen)}
+              >
+                <Home className="h-5 w-5" />
+                Home
+              </Link>
+              <Link
+                to='/cart'
+                className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+                onClick={() => setIsSheetOpen(!isSheetOpen)}
+              >
+                <ShoppingCart handleGoToCart={handleGoToCart} className="h-5 w-5" />
+                Cart
+              </Link>
+              <div
+                className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+                onClick={() => {
+                  handleTrackOrder();
+                  setIsSheetOpen(!isSheetOpen);
+                }}
+              >
+                <Truck className="h-5 w-5" />
+                Track Order
+              </div>
+              {!user &&      
+              <Link to='/user_auth' className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground">
+                <div className='flex items-center gap-4'>
+                  <UserRound className="h-5 w-5 hover:scale-102" />
+                  Login
+                </div>
+              </Link>}
+              {user &&
+              (
+                <div className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground">
+                  <div onClick={() => {
+                    handleLogoutUser();
+                    setIsSheetOpen(!isSheetOpen);
+                    }} className='flex items-center gap-4'>
+                    <UserRound className="h-5 w-5 hover:scale-102" />
+                    Logout
+                  </div>
+                </div>
+              )}
+            </nav>
+          </SheetContent>
+        </Sheet>
+      </div>
+      <div className="hidden lg:flex items-center gap-6 lg:gap-8">
         <Store onClick={handleGoToHero} className="h-4 w-4 hover:text-foreground hover:scale-102 transition-transform" />
-        <ul className="flex gap-6 text-sm font-semibold">
+        <ul className="flex gap-6 text-xs lg:text-sm font-semibold">
           <li onClick={() => {
               navigate('/results/all');
               window.location.reload();
@@ -211,24 +335,16 @@ const Topbar = () => {
           </li>
         </ul>
         <Search onMouseEnter={() => handleMouseEnter(searchItemsNull)} className="h-4 w-4 hover:scale-102" />
-        <CartIcon handleGoToCart={handleGoToCart} className="h-4 w-4 hover:scale-102" />        
-        <UserRound onClick={handleGoToUser} className="h-4 w-4 hover:scale-102" />
+        <CartIcon handleGoToCart={handleGoToCart} className="h-4 w-4 hover:scale-102" />  
+        {!user &&      
+        <UserRound onClick={handleGoToUser} className="h-4 w-4 hover:scale-102" />}
+        {user && (
+          <Truck onClick={handleTrackOrder} className="h-4 w-4" />
+            )}
         {user &&
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button
-                variant="outline"
-                size="icon"
-                className="overflow-hidden rounded-full"
-              >
-                <img
-                  src="/placeholder-user.jpg"
-                  width={56}
-                  height={56}
-                  alt="Avatar"
-                  className="object-cover"
-                />
-              </Button>
+              <UserRound onClick={handleGoToUser} className="h-4 w-4 hover:scale-102" />
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>My Account</DropdownMenuLabel>
@@ -238,18 +354,7 @@ const Topbar = () => {
             </DropdownMenuContent>
           </DropdownMenu>
           }
-      </div>
-      <div className="gap-15 text-sm">
-      {user && (
-                <Button onClick={handleTrackOrder} size="sm" variant="outline" className="absolute top-0 right-0 mt-4 mr-4 py-2 px-4">
-                <Truck className="h-3.5 w-3.5" />
-                <span className="lg:sr-only xl:not-sr-only xl:whitespace-nowrap">
-                  Track Order
-                </span>
-                </Button>
-            )}
-
-      
+          <Button onClick={() => navigate('/admin')} className='text-xs h-8 p-2 rounded-xs'>View Admin Dashboard</Button>
       </div>
       <AnimatePresence>
         {dropdownVisible && (

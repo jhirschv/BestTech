@@ -71,7 +71,7 @@ export default function AdminAuthPage() {
   };
 
   return (
-    <div className="w-full h-[100vh] flex items-center justify-center">
+    <div className="w-full h-[100vh] flex items-center justify-center p-2">
         <Tabs defaultValue="login" className="w-[400px]">
             <TabsList className="grid w-full grid-cols-2">
                 <TabsTrigger value="login">Admin Login</TabsTrigger>
@@ -80,13 +80,17 @@ export default function AdminAuthPage() {
             <TabsContent value="login">
                 <form onSubmit={handleLoginSubmit}>
                 <Card>
-                    <CardHeader>
+                    <CardHeader  className='pb-2'>
                     <CardTitle>Admin Login</CardTitle>
                     <CardDescription>
                         Enter your username and password to login to your account
                     </CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-2">
+                    <div className='flex gap-2'>
+                      <h1 className='text-sm font-semibold'>Username: admin</h1>
+                      <h1 className='text-sm font-semibold'>Password: admin</h1>
+                    </div>
                     <div className="space-y-1">
                         <Label htmlFor="username">Username</Label>
                         <Input name="username" id="username" placeholder="Username"/>

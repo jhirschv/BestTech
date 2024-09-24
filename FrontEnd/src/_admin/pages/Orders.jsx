@@ -62,6 +62,10 @@ import { AlertDialog,
 
 const STATUS_ENUM = ['NEW', 'PROCESSING', 'SHIPPED', 'DELIVERED'];
 
+const formatCurrency = (value) => {
+  return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value);
+}
+
 
 
 const Orders = () => {
@@ -194,11 +198,9 @@ const [adminOrderDto, setAdminOrderDto] = useState({
   }, []);
   
   return (
-    <main className=" grid flex-1 items-start gap-4 p-4 sm:px-0 sm:py-0 md:gap-8 lg:grid-cols-3 xl:grid-cols-3">
-          <div className=" grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-3">
-            
-            <Tabs defaultValue="week">
-              <div className="flex items-center">
+    <main className="grid w-full flex-1 items-start gap-4 sm:px-0 sm:py-0 md:gap-8 lg:grid-cols-3 xl:grid-cols-3">
+          <div className=" grid auto-rows-max items-start gap-0 lg:col-span-3 p-2">
+              <div className="flex items-center p-2">
                
                 <div className="ml-auto flex items-center gap-2">
                   <DropdownMenu>
@@ -237,7 +239,6 @@ const [adminOrderDto, setAdminOrderDto] = useState({
                   </Button>
                 </div>
               </div>
-              <TabsContent value="week">
                 <Card ref={cardRef1} x-chunk="dashboard-05-chunk-3">
                   <CardHeader className="px-7">
                     <CardTitle>Orders</CardTitle>
@@ -250,18 +251,18 @@ const [adminOrderDto, setAdminOrderDto] = useState({
                       <TableHeader>
                         <TableRow>
                         <TableHead>Order ID</TableHead>                          
-                          <TableHead>Customer</TableHead>                          
-                          <TableHead className="hidden sm:table-cell">
+                          <TableHead className=''>Customer</TableHead>                          
+                          <TableHead className="hidden md:table-cell">
                             Status
                           </TableHead>
                           <TableHead className="hidden md:table-cell">
                            Order Date
                           </TableHead>
-                          <TableHead className="hidden md:table-cell">
-                           WorkOrder Date
+                          <TableHead className="table-cell">
+                           Price
                           </TableHead>
-                          <TableHead >Amount</TableHead>
-                          <TableHead >Action</TableHead>
+                          <TableHead className='hidden'>Amount</TableHead>
+                          <TableHead className='hidden'>Action</TableHead>
                         </TableRow>
                       </TableHeader>
                       <TableBody>
@@ -386,11 +387,11 @@ const [adminOrderDto, setAdminOrderDto] = useState({
                                 </AlertDialogContent>
                               </AlertDialog>
                               </TableCell>                    
-                              <TableCell className="font-medium">
+                              <TableCell className='font-medium'>
                               {order.customerName.toUpperCase()}
                               </TableCell>                    
 
-                              <TableCell className="font-medium">                              
+                              <TableCell className='hidden md:table-cell font-medium'>                              
                               <select value={order.orderStatus}
                                  onChange={(e) => handleInputChange(order.orderId,'orderStatus', e.target.value)}
                                className="border border-gray-300 rounded px-1 py-1" >               
@@ -402,23 +403,13 @@ const [adminOrderDto, setAdminOrderDto] = useState({
                               </select>
                               </TableCell> 
 
-                              <TableCell className="font-medium">
+                              <TableCell className='hidden md:table-cell font-medium'>
                               {format(new Date(order.orderDate), 'MM/dd/yyyy')}
-                              
-                              </TableCell> 
-                              <TableCell>
-                              <input
-                                type="date"
-                                className="border rounded-sm sm:text-sm"                                
-                                value={order.workOrderDate}
-                                onChange={(e) => handleInputChange(order.orderId,'workOrderDate', e.target.value)}
-                            />
-                            
                              </TableCell> 
-                              <TableCell className="font-medium">
-                              {Math.round(order.total)}
+                              <TableCell className='font-medium'>
+                              {formatCurrency(Math.round(order.total * 100) / 100)}
                               </TableCell> 
-                              <TableCell className="font-medium">
+                              <TableCell className='hidden font-medium'>
                                
                                 <Button
                                       onClick={()=>handleUpdate(order.orderId)}
@@ -440,8 +431,6 @@ const [adminOrderDto, setAdminOrderDto] = useState({
                     </Table>
                   </CardContent>
                 </Card>
-              </TabsContent>
-            </Tabs>
           </div>
           
         </main>

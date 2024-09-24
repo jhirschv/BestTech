@@ -81,7 +81,7 @@ const [products, setProducts] = useState([]);
 
 
   return (
-    <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
+    <main className="grid flex-1 items-start gap-4 p-2 sm:py-0 md:gap-8">
         <Tabs defaultValue="all">
         <div className="flex items-center">
             <TabsList>
@@ -137,8 +137,8 @@ const [products, setProducts] = useState([]);
                     <TableHead>Name</TableHead>
                     <TableHead>Status</TableHead>
                     <TableHead className="hidden md:table-cell">Price</TableHead>
-                    <TableHead className="hidden md:table-cell">Total Sales</TableHead>
-                    <TableHead className="hidden md:table-cell">Description</TableHead>
+                    <TableHead className="hidden lg:table-cell">Total Sales</TableHead>
+                    <TableHead className="hidden lg:table-cell">Description</TableHead>
                     <TableHead>
                         <span className="sr-only">Actions</span>
                     </TableHead>
@@ -165,10 +165,10 @@ const [products, setProducts] = useState([]);
                     <TableCell className="hidden md:table-cell">
                         ${item.price}
                     </TableCell>
-                    <TableCell className="hidden md:table-cell">
+                    <TableCell className="hidden lg:table-cell">
                         {item.quantity}
                     </TableCell>
-                    <TableCell className="hidden md:table-cell">
+                    <TableCell className="hidden lg:table-cell">
                         {item.description}
                     </TableCell>
                     <TableCell>

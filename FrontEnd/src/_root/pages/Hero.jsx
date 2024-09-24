@@ -132,11 +132,10 @@ const Hero = () => {
     <div className="w-full h-full flex flex-col items-center">
         <div className="w-full flex flex-col gap-4">
           <div>
-            <div className='w-full flex flex-col items-center justify-center py-8'>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold whitespace-nowrap">
-              Technology that is
+            <div className='w-full flex flex-col items-center justify-center p-8 lg:p-16'>
+              <h1 className="text-3xl md:text-5xl lg:text-6xl font-semibold">
+              Technology. <span className='text-muted-foreground leading-tight'>Find the latest and most powerful devices.</span>
               </h1>
-              <FlipWords words={words} duration={2750} className='mt-1 text-muted-foreground text-4xl md:text-5xl lg:text-6xl font-semibold'/>
             </div>
             <div className="flex flex-col lg:flex-row w-full">
               <Card className="shadow-none border-none rounded-none relative w-full lg:w-1/2 h-[560px] lg:h-[550px] bg-[url('/eCommerce_images/ipad.jpg')] bg-cover bg-center">
@@ -221,11 +220,11 @@ const Hero = () => {
         </div>
 
         <div className="fixed bottom-5 right-5 z-50">
-            <button
+            <Button
               onClick={openModal}
-              className="bg-blue-500 text-white px-4 py-2 rounded-md">
+              className="">
               Open Chatbot
-            </button>
+            </Button>
             <Modal isOpen={isModalOpen} closeModal={closeModal}>
                <GenerativeAIChatbot />
             </Modal> 

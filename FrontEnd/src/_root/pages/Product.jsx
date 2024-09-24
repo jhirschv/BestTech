@@ -162,20 +162,20 @@ function getReview() {
 }
 
   return (
-    <div className='w-full grid grid-cols-3 px-20'>
-        <div className='col-span-2 flex flex-col items-center justify-center relative pt-24 pb-16'>
-            <Breadcrumb className="absolute top-3 left-0"> 
+    <div className='w-full grid grid-cols-3 px-10 md:px-20 relative'>
+        <div className='col-span-3 md:col-span-2 flex flex-col items-center justify-center pt-24 pb-4 md:pb-16'>
+            <Breadcrumb className="absolute top-3 left-2"> 
                 <BreadcrumbList>
                     <BreadcrumbItem>
-                    <BreadcrumbLink className='text-blue-500' href="/">Home</BreadcrumbLink>
+                    <BreadcrumbLink className='text-blue-500 text-xs' href="/">Home</BreadcrumbLink>
                     </BreadcrumbItem>
                     <BreadcrumbSeparator />
                     <BreadcrumbItem>
-                    <BreadcrumbLink className='text-blue-500' href="/results">Results</BreadcrumbLink>
+                    <BreadcrumbLink className='text-blue-500 text-xs' href="/results/all">Results</BreadcrumbLink>
                     </BreadcrumbItem>
                     <BreadcrumbSeparator />
                     <BreadcrumbItem>
-                    <BreadcrumbPage className='text-blue-500'>{product?.productName}</BreadcrumbPage>
+                    <BreadcrumbPage className='text-blue-500 text-xs'>{product?.productName}</BreadcrumbPage>
                     </BreadcrumbItem>
                 </BreadcrumbList>
             </Breadcrumb>
@@ -189,11 +189,11 @@ function getReview() {
             }
         </div>
         
-        <div className='col-span-1 h-full flex flex-col pt-32'>
+        <div className='col-span-3 md:col-span-1 h-full flex flex-col md:pt-32'>
             <p className='text-primary'></p>
             <h1 className='text-2xl font-bold pb-2'>{product?.productName}</h1>
             <p className='pb-2 text-base font-semibold'>{product?.description}</p>
-            <Button className='w-2/3 mt-12 flex items-center justify-center p-8 rounded-full text-lg' onClick = {() => handleAddToCart(product)} ><FontAwesomeIcon className='mr-2' icon={faCartShopping} />Add to Cart</Button>
+            <Button className='w-full md:w-2/3 mt-12 flex items-center justify-center p-8 rounded-full text-lg' onClick = {() => handleAddToCart(product)} ><FontAwesomeIcon className='mr-2' icon={faCartShopping} />Add to Cart</Button>
         </div>
         <div className='col-span-3 w-full pt-16'>
             <h1 className='text-center text-3xl font-semibold'>Recommended</h1>
@@ -206,27 +206,30 @@ function getReview() {
             </div>
         </div>
         <div className='col-span-3 h-96'>
-                <h1 className='text-2xl font-semibold'>Reviews</h1>
+                <h1 className='text-2xl font-semibold text-center py-2'>Reviews</h1>
                 <Textarea
-                    placeholder="Type your message here."
+                    placeholder="Type your review here."
                     value={description}
                     onChange={handleChange}
-                    className='w-full'
+                    className='w-full h-28'
                 />
-                <Button onClick={createReview}>Submit Review</Button>
-                {reviews.slice().reverse().map((review) => (
-                    <Card key={review.id}>
-                    
-                        <CardHeader>
-                            <CardTitle>{review.user?.userName}</CardTitle>
-                            <CardDescription>Rating {review.rating}/5</CardDescription>
-                        </CardHeader>
-                        <CardContent>
-                            <p>{review.description}</p>
-                        </CardContent>
-                        <Button type="button" variant="destructive" onClick={() => deleteReview(review.id)}>Delete Review</Button>
-                    </Card>
-                ))}
+                <Button className='w-full rounded-sm mt-2' onClick={createReview}>Submit Review</Button>
+                <div className='flex flex-col gap-2 py-4'>
+                  <h3 className='font-semibold text-lg text-center'>Customer Reviews</h3>
+                  {reviews.slice().reverse().map((review) => (
+                      <Card key={review.id}>
+                      
+                          <CardHeader>
+                              <CardTitle>{review.username}</CardTitle>
+                              <CardDescription>Rating {review.rating}/5</CardDescription>
+                          </CardHeader>
+                          <CardContent>
+                              <p>{review.description}</p>
+                          </CardContent>
+                      </Card>
+                  ))}
+                </div>
+                
         </div>
     </div>
     

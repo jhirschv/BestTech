@@ -35,7 +35,22 @@ import { useParams } from 'react-router-dom'
 import { Toaster } from "@/components/ui/toaster"
 import { ToastAction } from "@/components/ui/toast"
 import { useToast } from "@/components/ui/use-toast"
-
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet"
+import { SlidersHorizontal } from 'lucide-react';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion"
+import { Checkbox } from '@/components/ui/checkbox'
 
 const ListPage = () => {
 
@@ -210,15 +225,141 @@ useEffect(() => {
   }
 }, [data]);
 
+const items = ["Laptops", "Phones", "Cameras", "Computers", "Headphones", "TVs", "Accessories"];
+const prices = ["$0 - $99", "$100 - $249", "$250 - $499", "$500 - $1000+"];
+const brands = ["HP", "Apple", "Dell", "ASUS", "Sony", "Samsung"];
+const ratings = ["5 Star", "4 Star", "3 Star", "2 Star", "1 Star"];
+
+const handleCheckboxChange = (category, value) => {
+  setFilters((prevFilters) => {
+    // Ensure that the category is always an array
+    const updatedCategory = prevFilters[category] || [];
+
+    return {
+      ...prevFilters,
+      [category]: updatedCategory.includes(value)
+        ? updatedCategory.filter(item => item !== value)
+        : [...updatedCategory, value]
+    };
+  });
+};
+
   return (
     <div className='flex flex-col items-center w-full'>
-      <Toaster />
       <div className='w-full h-14 flex items-center pl-6 py-4'>
+        <Toaster />
         <h1 className='text-xl font-semibold'><span className='text-muted-foreground'>Search results for </span>"{searchTerm}" <span className='text-muted-foreground'>({filteredData.length})</span></h1>
+        <Sheet>
+          <SheetTrigger asChild><Button className='ml-auto mr-4 sm:hidden'><SlidersHorizontal className='w-4 h-4 mr-1'/>Filters</Button></SheetTrigger>
+          <SheetContent>
+            <SheetHeader>
+              <SheetTitle>Filters</SheetTitle>
+            </SheetHeader>
+              <div className="w-full flex-col bg-background">
+                <nav className="grid items-start gap-4 pt-8 px-2 text-sm font-medium lg:px-4">
+                <div>
+                  <Accordion type="single" collapsible>
+                    <AccordionItem value="item-1">
+                      <AccordionTrigger className='text-base pl-6'>Category</AccordionTrigger>
+                      <AccordionContent className='flex flex-col gap-2'>
+                        {items.map((item, index) => (
+                          <div key={index} className="flex items-center space-x-2 pl-6">
+                            <Checkbox
+                              id={`category-${index}`}
+                              className="rounded-xs"
+                              checked={filters.category.includes(item)}
+                              onCheckedChange={() => handleCheckboxChange("category", item)}
+                            />
+                            <label htmlFor={`category-${index}`} className="text-base font-medium">
+                              {item}
+                            </label>
+                          </div>
+                        ))}
+                      </AccordionContent>
+                    </AccordionItem>
+                  </Accordion>
+                  </div>
+                  <div>
+                  <Accordion type="single" collapsible>
+                    <AccordionItem value="item-1">
+                      <AccordionTrigger className='text-base pl-6'>Shop by price</AccordionTrigger>
+                      <AccordionContent className='flex flex-col gap-2'>
+                        {prices.map((price, index) => (
+                          <div key={index} className="flex items-center space-x-2 pl-6">
+                            <Checkbox
+                              id={`price-${index}`}
+                              className="rounded-xs"
+                              checked={filters.price.includes(price)}
+                              onCheckedChange={() => handleCheckboxChange("price", price)}
+                            />
+                            <label htmlFor={`price-${index}`} className="text-base font-medium">
+                              {price}
+                            </label>
+                          </div>
+                        ))}
+                      </AccordionContent>
+                    </AccordionItem>
+                  </Accordion>
+                  </div>
+                  <div>
+                  <Accordion type="single" collapsible>
+                    <AccordionItem value="item-1">
+                      <AccordionTrigger className='text-base pl-6'>Brand</AccordionTrigger>
+                      <AccordionContent className='flex flex-col gap-2'>
+                          {brands.map((brand, index) => (
+                            <div key={index} className="flex items-center space-x-2 pl-6">
+                              <Checkbox
+                                id={`brand-${index}`}
+                                checked={filters.brand?.includes(brand) || false}
+                                onCheckedChange={() => handleCheckboxChange('brand', brand)}
+                                className="rounded-xs"
+                              />
+                              <label
+                                htmlFor={`brand-${index}`}
+                                className="text-base font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                              >
+                                {brand}
+                              </label>
+                            </div>
+                          ))}
+                        </AccordionContent>
+                    </AccordionItem>
+                  </Accordion>
+                  </div>
+                  <div>
+                  <Accordion type="single" collapsible>
+                    <AccordionItem value="item-1">
+                      <AccordionTrigger className='text-base pl-6'>Rating</AccordionTrigger>
+                      <AccordionContent className='flex flex-col gap-2'>
+                          {ratings.map((rating, index) => (
+                            <div key={index} className="flex items-center space-x-2 pl-6">
+                              <Checkbox
+                                id={`rating-${index}`}
+                                /* checked={filters.ratings?.includes(rating) || false}
+                                onCheckedChange={() => handleCheckboxChange('ratings', rating)} */
+                                className="rounded-xs"
+                              />
+                              <label
+                                htmlFor={`rating-${index}`}
+                                className="text-base font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                              >
+                                {rating}
+                              </label>
+                            </div>
+                          ))}
+                        </AccordionContent>
+                    </AccordionItem>
+                  </Accordion>
+                  </div>
+                </nav>
+              </div>
+          </SheetContent>
+        </Sheet>
       </div>
       <div className='flex w-full'>
         <SideBar filters={filters} setFilters={setFilters}/>
-        <div className='h-full w-full grid grid-cols-2 lg:grid-cols-3 gap-6 p-4 pt-0'>
+
+        <div className='h-full w-full grid grid-cols-1 lg:grid-cols-2 gap-6 p-4 pt-0'>
         {currentItems.length > 0 ? (
           currentItems.map(product => (
             <Card key={product.productId} className="flex flex-col rounded-xs">
@@ -232,7 +373,7 @@ useEffect(() => {
                 <p className='text-lg font-semibold'>${product.price}</p>
                 <div key={product.productId} style={{ marginBottom: '1rem' }}>
                   <Select onValueChange={(value) => handleChange(product.productId, value)}>
-                    <SelectTrigger className="w-[120px] ml-auto">
+                    <SelectTrigger className="w-[120px] h-8 ml-auto">
                       <SelectValue placeholder="Quantity: 1" />
                     </SelectTrigger>
                     <SelectContent>

@@ -54,7 +54,7 @@ const SideBar = ({ filters, setFilters }) => {
 };
 
   return (
-    <aside className="w-64 flex-col border-r bg-background sm:flex">
+    <aside className="w-64 flex-col border-r bg-background hidden sm:flex">
       <nav className="grid items-start gap-4 pt-8 px-2 text-sm font-medium lg:px-4">
       <div>
         <Accordion type="single" collapsible>

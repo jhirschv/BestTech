@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   Card,
   CardContent,
@@ -130,25 +130,20 @@ const Cart = () => {
  };
 
   return (
-    <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
-        <Tabs defaultValue="all">
-        
-        <TabsContent value="all">
-            <Card className="bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90%" x-chunk="dashboard-06-chunk-0">
-            <CardHeader>
-                <CardTitle>CART SUMMARY</CardTitle>                
+    <main className="grid flex-1 items-start gap-4 md:p-4 sm:px-6 sm:py-0 md:gap-8">
+            <Card className="border-none" x-chunk="dashboard-06-chunk-0">
+            <CardHeader className='py-2'>
+                <CardTitle>Cart Summary</CardTitle>                
             </CardHeader>
-            <CardContent>
+            <CardContent className='p-2'>
+              {products.length > 0 ? (
                 <Table>
                 <TableHeader>
                     <TableRow>
                     
-                    <TableHead className="font-bold text-black">S.No </TableHead>
-                    <TableHead className="font-bold text-black">Product Name</TableHead>                   
-                    <TableHead className="font-bold text-black">Price</TableHead>
-                    <TableHead className="font-bold text-black hidden md:table-cell">Quantity</TableHead>
-                    <TableHead className="font-bold text-black hidden md:table-cell">Sub Total</TableHead>
-                    
+                    <TableHead className="">Product Name</TableHead>                   
+                    <TableHead className="">Price</TableHead>
+                    <TableHead className=" table-cell">Quantity</TableHead>
                     <TableHead>
                         <span className="sr-only">Actions</span>
                     </TableHead>
@@ -158,12 +153,8 @@ const Cart = () => {
                   
                 {products.map((item,index) => (
                     <TableRow key={item.productId} className="hover:bg-gray-100 cursor-pointer">
-                    
-                    <TableCell className="font-medium">
-                     {index+1}
-                    </TableCell>                    
 
-                    <TableCell className="font-medium">
+                    <TableCell className="font-medium ine-clamp-2 md:line-clamp-none">
                      {item.productName}
                     </TableCell> 
                     <TableCell className="font-medium">
@@ -172,7 +163,7 @@ const Cart = () => {
 
                     <TableCell className="hidden md:table-cell">                      
                           
-                    <div className="flex flex-row h-10 w-20 rounded-lg relative bg-transparent mt-1">
+                    <div className="relative flex flex-row h-10 w-20 rounded-lg bg-transparent mt-1">
 
                        <Button onClick={() => handleMinus(item.productId)} 
                        className="p-0 rounded-none bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-l cursor-pointer outline-none">
@@ -188,35 +179,37 @@ const Cart = () => {
                           
                     </TableCell>
 
-                    <TableCell className="font-medium hidden md:table-cell">
-                    {item.quantity * item.price}
+                    <TableCell className="md:hidden font-semibold table-cell">
+                    {item.quantity}
                     </TableCell>
-
-                    <TableCell>
-                       <Button onClick={() => deleteProduct(item.productId)}>Delete</Button>                                     
+                    <TableCell className="px-0 flex items-center font-semibold table-cell">
+                      <Button className='text-xs p-1 h-8 rounded-xs md:text-md' onClick={() => deleteProduct(item.productId)}>Remove</Button>                                     
                     </TableCell>
-                   
                     </TableRow>
                     
                 ))}
                     
                 </TableBody>
 
-                </Table>     
+                </Table>) : (
+                <div className='p-8'>
+                  <h1 className='text-center text-xl font-semibold'>Cart Empty</h1>
+                </div>
+                )}    
                
                                                             
                 
             </CardContent> 
 
-            <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
+            <div className="border-t border-gray-200 flex flex-col items-center justify-center py-6">
                   <div className="flex items-center justify-center font-medium text-gray-900" >
                     <p>Total : ${totalPrice}</p>                   
                   </div>
                   <p className="flex items-center justify-center mt-0.5 text-sm text-black-500">Shipping and taxes calculated at checkout.</p>
-                  <div className="mt-6">
+                  <div className="mt-6 flex justify-center">
                     <a
                       href="#" onClick = {handleGoToOrderSummary}
-                      className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+                      className="w-56 flex items-center justify-center rounded-md border border-transparent bg-primary px-6 py-3 text-base font-medium text-white"
                     >
                       Proceed To Checkout
                     </a>
@@ -224,28 +217,19 @@ const Cart = () => {
                   <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                     <p>
                       or{'  '}
-                      <button
+                      <Link
+                        to='/results/all'
                         type="button"
                         onClick={() => setOpen(false)}
-                        className="font-medium text-indigo-600 hover:text-indigo-500"
+                        className="font-medium text-blue-500 hover:text-indigo-500"
                       >
                         Continue Shopping
                         <span aria-hidden="true"> &rarr;</span>
-                      </button>
+                      </Link>
                     </p>
                   </div>
                 </div>
-            
-            
-            <CardFooter>
-                <div className="text-xs text-muted-foreground">
-                Showing <strong>1-10</strong> of <strong>32</strong>{" "}
-                products
-                </div>
-            </CardFooter>
             </Card>
-        </TabsContent>
-        </Tabs>
     </main>
   )
 
