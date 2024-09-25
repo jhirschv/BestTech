@@ -60,7 +60,7 @@ const [products, setProducts] = useState([]);
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/product/');
+        const response = await axios.get('https://besttech-backend-6154a0cdbf1c.herokuapp.com/product/');
         setProducts(response.data);
       } catch (error) {
         console.error('Error fetching the products:', error);
@@ -72,7 +72,7 @@ const [products, setProducts] = useState([]);
 
   const deleteProduct = async (productId) => {
     try {
-      const response = await axios.delete(`http://localhost:8080/product/del/${productId}`);
+      const response = await axios.delete(`https://besttech-backend-6154a0cdbf1c.herokuapp.com/product/del/${productId}`);
       setProducts((prevProducts) => prevProducts.filter(product => product.productId !== productId));
     } catch (error) {
       console.error('Error deleting the products:', error);

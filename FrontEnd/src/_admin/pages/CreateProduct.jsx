@@ -77,7 +77,7 @@ const CreateProduct = () => {
         };
     
         try {
-          const response = await axios.post('http://localhost:8080/product/add', formData, {
+          const response = await axios.post('https://besttech-backend-6154a0cdbf1c.herokuapp.com/product/add', formData, {
             headers: {
               'Content-Type': 'application/json'
             }

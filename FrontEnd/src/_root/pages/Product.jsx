@@ -60,7 +60,7 @@ const cards = recommendations.map((card, index) => (
 useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/product/${productId}`);
+        const response = await axios.get(`https://besttech-backend-6154a0cdbf1c.herokuapp.com/product/${productId}`);
         setProduct(response.data);
         console.log(response.data)
       } catch (error) {
@@ -127,7 +127,7 @@ const createReview = () => {
             productId: productId,
         },
     };
-    axios.post('http://localhost:8080/api/review/create', payload).then((response) => {
+    axios.post('https://besttech-backend-6154a0cdbf1c.herokuapp.com/api/review/create', payload).then((response) => {
         console.log(response.data);
         getReview();
     })
@@ -151,7 +151,7 @@ const deleteReview = (reviewId) => {
 function getReview() {
     
     //axios.get(`http://localhost:8080/api/review/get?productID=${productId}`).then((response) => {
-        axios.get(`http://localhost:8080/api/review/get?productID=${productId}`).then((response) => {
+        axios.get(`https://besttech-backend-6154a0cdbf1c.herokuapp.com/api/review/get?productID=${productId}`).then((response) => {
         console.log(response.data)
         
         setReviews(response.data);

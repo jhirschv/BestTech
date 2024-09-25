@@ -182,13 +182,13 @@ function handleAddToCart(product , quantity) {
 
 function fetchData() {
   if(searchTerm == "all") {
-    axios.get('http://localhost:8080/product/').then((response) => {
+    axios.get('https://besttech-backend-6154a0cdbf1c.herokuapp.com/product/').then((response) => {
       setData(response.data)
       setFilteredData(response.data);
       console.log(response.data)
     })
   } else {
-    axios.post('http://localhost:8080/product/search', {keyword: searchTerm}).then((response) => {
+    axios.post('https://besttech-backend-6154a0cdbf1c.herokuapp.com/product/search', {keyword: searchTerm}).then((response) => {
       setData(response.data)
       setFilteredData(response.data);
       console.log(response.data)

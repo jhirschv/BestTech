@@ -24,28 +24,28 @@ const Analytics = () => {
     const [areaChartData, setAreaChartData] = useState([]);
 
     useEffect(() => {
-      axios.get("http://localhost:8080/api/order-items/category-chart").then((response) => {
+      axios.get("https://besttech-backend-6154a0cdbf1c.herokuapp.com/api/order-items/category-chart").then((response) => {
         setPieChartData(response.data);
         console.log(response.data)
       });
     }, []);
 
     useEffect(() => {
-      axios.get("http://localhost:8080/orders/average-cost-last-7-days").then((response) => {
+      axios.get("https://besttech-backend-6154a0cdbf1c.herokuapp.com/orders/average-cost-last-7-days").then((response) => {
         setBarChartData(response.data);
         console.log(response.data)
       });
     }, []);
 
     useEffect(() => {
-      axios.get("http://localhost:8080/orders/revenue/last7days").then((response) => {
+      axios.get("https://besttech-backend-6154a0cdbf1c.herokuapp.com/orders/revenue/last7days").then((response) => {
         setLineChartData(response.data);
         console.log(response.data)
       });
     }, []);
 
     useEffect(() => {
-      axios.get("http://localhost:8080/orders/products-sold/last7days").then((response) => {
+      axios.get("https://besttech-backend-6154a0cdbf1c.herokuapp.com/orders/products-sold/last7days").then((response) => {
         setAreaChartData(response.data);
         console.log(response.data)
       });

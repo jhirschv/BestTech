@@ -47,7 +47,7 @@ export default function UserAuthPage() {
   const registerUser = async (e) => {
 
     try {
-      const response = await axios.post('http://localhost:8080/register', {
+      const response = await axios.post('https://besttech-backend-6154a0cdbf1c.herokuapp.com/register', {
         userName: e.target.usernameRegister.value,
         password: e.target.passwordRegister.value,
         role: "User"

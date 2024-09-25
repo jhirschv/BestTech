@@ -94,7 +94,7 @@ const EditProduct = () => {
         };
     
         try {
-          const response = await axios.put(`http://localhost:8080/product/${productId}`, formData, {
+          const response = await axios.put(`https://besttech-backend-6154a0cdbf1c.herokuapp.com/product/${productId}`, formData, {
             headers: {
               'Content-Type': 'application/json'
             }
