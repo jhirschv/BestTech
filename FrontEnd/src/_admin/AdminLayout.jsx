@@ -201,6 +201,7 @@ export default function AdminLayout() {
           ref={scrollContainerRef2}
           className="overflow-y-auto flex-1"
         >
+          
           <Outlet />
         </div>
       </div>
