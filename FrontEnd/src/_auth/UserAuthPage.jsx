@@ -156,7 +156,7 @@ export default function UserAuthPage() {
                   <Input name="passwordRegister" id="passwordRegister" type="passwordRegister" placeholder="Password"/>
                 </div>
               </CardContent>
-              <CardFooter>
+              <CardFooter className='flex gap-2'>
                 <Button type="submit">Create account</Button>
                 <Button variant="outline" onClick={handleGoToHero}>Go home</Button>
               </CardFooter>
