@@ -183,16 +183,16 @@ function getReview() {
             <img 
                 src={product.imageUrl} 
                 alt={'No picture'} 
-                className="w-full h-80 object-contain"
+                className="w-full h-72 md:96 object-contain"
             /> :
-            <div className="w-full h-80 object-contain my-4"></div>
+            <div className="w-full h-72 md:96 object-contain my-4"></div>
             }
         </div>
         
         <div className='col-span-3 md:col-span-1 h-full flex flex-col md:pt-32'>
             <p className='text-primary'></p>
             <h1 className='text-xl font-bold pb-2'>{product?.productName}</h1>
-            <p className='pb-2 text-md'>{product?.description}</p>
+            <p className='pb-2 text-sm'>{product?.description}</p>
             <Button className='w-full md:w-2/3 mt-12 flex items-center justify-center p-8 rounded-full text-lg' onClick = {() => handleAddToCart(product)} ><FontAwesomeIcon className='mr-2' icon={faCartShopping} />Add to Cart</Button>
         </div>
         <div className='col-span-3 w-full pt-16'>
