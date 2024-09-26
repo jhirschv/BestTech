@@ -118,6 +118,10 @@ export default function UserAuthPage() {
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-2">
+                <div className='flex gap-2'>
+                  <h1 className='text-sm font-semibold'>Username: Admin</h1>
+                  <h1 className='text-sm font-semibold'>Password: Admin</h1>
+                </div>
                 <div className="space-y-1">
                   <Label htmlFor="username">Username</Label>
                   <Input name="username" id="username" placeholder="Username"/>

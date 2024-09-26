@@ -91,7 +91,8 @@ const PaymentModel = ({ onClose, onSuccess, amount, addressDto, orderId}) => {
                 <div className='flex flex-col'>
                     <h2 className="text-xl font-bold">Enter Card Details</h2>
                     <h3 className='text-sm font-semibold'>Card Number: 4242 4242 4242 4242</h3>
-                    <h3 className='text-sm font-semibold'>MM/YY/CVC: 1234567</h3>
+                    <h3 className='text-sm font-semibold'>MM/YY/CVC: 1234</h3>
+                    <h3 className='text-sm font-semibold'>CVC: 567</h3>
                     <h3 className='text-sm font-semibold mb-2'>Zip: 12345</h3>
                 </div>
                 <form onSubmit={handleSubmit} className="space-y-4">
