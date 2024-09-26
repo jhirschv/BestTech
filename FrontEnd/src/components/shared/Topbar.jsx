@@ -182,7 +182,7 @@ const Topbar = () => {
 
   return (
     <div className="fixed z-50 top-0 bg-background flex items-center justify-between lg:justify-center w-full h-14 px-4 bg-secondary">
-      <div className='lg:hidden flex items-center gap-1 mr-4 md:mr-0'>
+      <div className='lg:hidden flex items-center gap-1 mr-6 md:mr-0'>
         <Store onClick={handleGoToHero} className="h-5 w-5 hover:text-foreground hover:scale-102 transition-transform" />
       </div>
       <div className='lg:hidden flex gap-6 items-center'>

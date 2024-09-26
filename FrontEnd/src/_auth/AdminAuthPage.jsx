@@ -36,7 +36,6 @@ export default function AdminAuthPage() {
   let {loginUser, setAuthTokens, setUser, logoutUser} = useContext(AuthContext)
 
   const registerAdmin = async (e) => {
-    logoutUser();
     try {
       const response = await axios.post('https://besttech-backend-6154a0cdbf1c.herokuapp.com/register', {
         userName: e.target.usernameRegister.value,
