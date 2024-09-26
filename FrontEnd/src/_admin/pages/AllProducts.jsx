@@ -81,7 +81,7 @@ const [products, setProducts] = useState([]);
 
 
   return (
-    <main className="grid flex-1 items-start gap-4 p-2 sm:py-0 md:gap-8">
+    <main className="grid flex-1 items-start gap-4 md:p-2 sm:py-0 md:gap-8">
         <Tabs defaultValue="all">
         <div className="flex items-center">
             <TabsList>
@@ -120,7 +120,7 @@ const [products, setProducts] = useState([]);
             </div>
         </div>
         <TabsContent value="all">
-            <Card x-chunk="dashboard-06-chunk-0">
+            <Card className='rounded-none md:rounded-lg' x-chunk="dashboard-06-chunk-0">
             <CardHeader>
                 <CardTitle>Products</CardTitle>
                 <CardDescription>

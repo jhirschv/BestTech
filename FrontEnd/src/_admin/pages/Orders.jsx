@@ -199,7 +199,7 @@ const [adminOrderDto, setAdminOrderDto] = useState({
   
   return (
     <main className="grid w-full flex-1 items-start gap-4 sm:px-0 sm:py-0 md:gap-8 lg:grid-cols-3 xl:grid-cols-3">
-          <div className=" grid auto-rows-max items-start gap-0 lg:col-span-3 p-2">
+          <div className=" grid auto-rows-max items-start gap-0 lg:col-span-3 md:p-2">
               <div className="flex items-center p-2">
                
                 <div className="ml-auto flex items-center gap-2">
@@ -239,7 +239,7 @@ const [adminOrderDto, setAdminOrderDto] = useState({
                   </Button>
                 </div>
               </div>
-                <Card ref={cardRef1} x-chunk="dashboard-05-chunk-3">
+                <Card ref={cardRef1} className='rounded-none md:rounded-lg' x-chunk="dashboard-05-chunk-3">
                   <CardHeader className="px-7">
                     <CardTitle>Orders</CardTitle>
                     <CardDescription>
