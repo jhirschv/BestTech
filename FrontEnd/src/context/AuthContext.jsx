@@ -14,6 +14,7 @@ export const AuthProvider = ({ children }) => {
 
   let loginUser = async (e) => {
     e.preventDefault();
+    logoutUser();
     try {
       const response = await apiClient.post('login', {
         userName: e.target.username.value,
@@ -36,6 +37,7 @@ export const AuthProvider = ({ children }) => {
 
   let AdminLoginUser = async (e) => {
     e.preventDefault();
+    logoutUser();
     try {
       const response = await apiClient.post('login', {
         userName: e.target.username.value,
