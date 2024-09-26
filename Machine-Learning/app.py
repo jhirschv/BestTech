@@ -31,6 +31,3 @@ def recommend(product_id):
     tfidf_matrix = tfidf.fit_transform(df['description'])
     recommendations = get_recommendations(product_id, df, tfidf_matrix)
     return jsonify(recommendations.to_dict('records'))
-
-if __name__ == '__main__':
-    app.run(debug=True)

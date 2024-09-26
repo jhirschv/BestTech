@@ -1,1 +1,1 @@
-web: python Machine-Learning/app.py
+web: gunicorn Machine-Learning.app:app
