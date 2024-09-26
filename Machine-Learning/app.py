@@ -11,7 +11,7 @@ app = Flask(__name__)
 CORS(app)
 
 def fetch_products():
-    response = requests.get('http://localhost:8080/product/')
+    response = requests.get('https://besttech-backend-6154a0cdbf1c.herokuapp.com/product/')
     products = response.json()
     return pd.DataFrame(products)
 
