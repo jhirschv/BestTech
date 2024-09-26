@@ -12,6 +12,7 @@ import FlipWords from "@/components/ui/flip-words"
 import { useNavigate } from 'react-router-dom';
 import GenerativeAIChatbot from '@/components/chat/GenerativeAIChatbot'
 import Modal from '@/components/chat/Modal'
+import { Link } from 'react-router-dom';
 
 const Hero = () => {
   
@@ -142,7 +143,9 @@ const Hero = () => {
                 <div className="absolute inset-0 flex flex-col justify-between p-4">
                   <h1 className='text-3xl md:text-5xl font-semibold text-center pt-3'>iPad Pro</h1>
                   <div className="flex justify-end">
-                    <Button className='mb-4 mr-4'>Shop</Button>
+                    <Link to='/results/all'>
+                      <Button className='mb-4 mr-4'>Shop</Button>
+                    </Link>
                   </div>
                 </div>
               </Card>
@@ -153,7 +156,9 @@ const Hero = () => {
                   <div>
                     <h1 className='text-3xl md:text-5xl text-background font-semibold text-center mb-4'>Sony Alpha Collection</h1>
                     <div className="flex justify-end">
-                      <Button className='bg-background text-foreground hover:text-background mb-4 mr-4'>Shop</Button>
+                      <Link to='/results/all'>
+                        <Button className='bg-background text-foreground hover:text-background mb-4 mr-4'>Shop</Button>
+                      </Link>
                     </div>
                   </div>
                 </div>

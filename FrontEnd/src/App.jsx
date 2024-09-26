@@ -21,8 +21,11 @@ import OrderConfirmation from './_root/pages/OrderConfirmation';
 import OrderDetails from './_root/pages/OrderDetails';
 import OrderTracking from './_root/pages/OrderTracking';
 import GenerativeAIChatbot from './components/chat/GenerativeAIChatbot';
+import useDisableZoom from './utils/useDisableZoom';
 
 function App() {
+
+  useDisableZoom();
 
   return (
         <Routes>
