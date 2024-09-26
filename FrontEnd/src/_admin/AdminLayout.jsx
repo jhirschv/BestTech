@@ -76,11 +76,20 @@ import {
     TooltipTrigger,
   } from "@/components/ui/tooltip"
 import { Outlet } from "react-router-dom";
-import { useNavigate } from 'react-router-dom';
-import { useContext, useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useContext, useState, useRef, useEffect } from 'react';
 import AuthContext from '../context/AuthContext';
 
 export default function AdminLayout() {
+
+  const scrollContainerRef = useRef(null);
+  const location = useLocation();
+
+  useEffect(() => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTop = 0;
+    }
+  }, [location])
 
     let { logoutUser } = useContext(AuthContext)
 
@@ -188,7 +197,12 @@ export default function AdminLayout() {
             </DropdownMenuContent>
           </DropdownMenu>
         </header>
-        <Outlet />
+        <div
+          ref={scrollContainerRef}
+          className="overflow-y-auto flex-1"
+        >
+          <Outlet />
+        </div>
       </div>
     </div>
   )
