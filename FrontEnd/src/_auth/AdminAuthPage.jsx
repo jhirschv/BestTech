@@ -88,8 +88,8 @@ export default function AdminAuthPage() {
                     </CardHeader>
                     <CardContent className="space-y-2">
                     <div className='flex gap-2'>
-                      <h1 className='text-sm font-semibold'>Username: Admin</h1>
-                      <h1 className='text-sm font-semibold'>Password: Admin</h1>
+                      <h1 className='text-sm font-semibold'>Username: DemoAdmin</h1>
+                      <h1 className='text-sm font-semibold'>Password: DemoAdmin</h1>
                     </div>
                     <div className="space-y-1">
                         <Label htmlFor="username">Username</Label>
