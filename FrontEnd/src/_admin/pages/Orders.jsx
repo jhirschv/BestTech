@@ -200,7 +200,7 @@ const [adminOrderDto, setAdminOrderDto] = useState({
   return (
     <main className="grid w-full flex-1 items-start gap-4 sm:px-0 sm:py-0 md:gap-8 lg:grid-cols-3 xl:grid-cols-3">
           <div className=" grid auto-rows-max items-start gap-0 lg:col-span-3 md:p-2">
-              <div className="flex items-center p-2 py-4">
+              <div className="flex items-center p-2 py-3">
                
                 <div className="ml-auto flex items-center gap-2">
                   <DropdownMenu>
