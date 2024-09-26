@@ -45,7 +45,7 @@ export default function UserAuthPage() {
   let {loginUser, setAuthTokens, setUser} = useContext(AuthContext)
 
   const registerUser = async (e) => {
-
+    logoutUser();
     try {
       const response = await axios.post('https://besttech-backend-6154a0cdbf1c.herokuapp.com/register', {
         userName: e.target.usernameRegister.value,
@@ -119,8 +119,8 @@ export default function UserAuthPage() {
               </CardHeader>
               <CardContent className="space-y-2">
                 <div className='flex gap-2'>
-                  <h1 className='text-sm font-semibold'>Username: Demoadmin</h1>
-                  <h1 className='text-sm font-semibold'>Password: Demoadmin</h1>
+                  <h1 className='text-sm font-semibold'>Username: Test</h1>
+                  <h1 className='text-sm font-semibold'>Password: Test</h1>
                 </div>
                 <div className="space-y-1">
                   <Label htmlFor="username">Username</Label>
