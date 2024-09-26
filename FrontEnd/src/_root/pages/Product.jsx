@@ -193,7 +193,7 @@ function getReview() {
             <p className='text-primary'></p>
             <h1 className='text-xl font-bold pb-2'>{product?.productName}</h1>
             <p className='pb-2 text-sm'>{product?.description}</p>
-            <Button className='w-full md:w-2/3 mt-12 flex items-center justify-center p-8 rounded-full text-lg' onClick = {() => handleAddToCart(product)} ><FontAwesomeIcon className='mr-2' icon={faCartShopping} />Add to Cart</Button>
+            <Button className='w-full md:w-2/3 mt-4 md:mt-12 flex items-center justify-center p-8 rounded-full text-lg' onClick = {() => handleAddToCart(product)} ><FontAwesomeIcon className='mr-2' icon={faCartShopping} />Add to Cart</Button>
         </div>
         <div className='col-span-3 w-full pt-16'>
             <h1 className='text-center text-3xl font-semibold'>Recommended</h1>
@@ -211,7 +211,7 @@ function getReview() {
                     placeholder="Type your review here."
                     value={description}
                     onChange={handleChange}
-                    className='w-full h-28'
+                    className='w-full h-28 text-base'
                 />
                 <Button className='w-full rounded-sm mt-2' onClick={createReview}>Submit Review</Button>
                 <div className='flex flex-col gap-2 py-4'>
