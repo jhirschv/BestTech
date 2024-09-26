@@ -82,12 +82,12 @@ import AuthContext from '../context/AuthContext';
 
 export default function AdminLayout() {
 
-  const scrollContainerRef = useRef(null);
+  const scrollContainerRef2 = useRef(null);
   const location = useLocation();
 
   useEffect(() => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollTop = 0;
+    if (scrollContainerRef2.current) {
+      scrollContainerRef2.current.scrollTop = 0;
     }
   }, [location])
 
@@ -198,7 +198,7 @@ export default function AdminLayout() {
           </DropdownMenu>
         </header>
         <div
-          ref={scrollContainerRef}
+          ref={scrollContainerRef2}
           className="overflow-y-auto flex-1"
         >
           <Outlet />
